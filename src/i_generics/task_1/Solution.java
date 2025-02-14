@@ -27,12 +27,16 @@ public class Solution {
         System.out.println(sCopy);
     }
 
-    public static <T> void copyIf(Predicate<T> pr, List<? extends T> source, List<? super T> destination){
-        for(T t : source){
-            if(pr.test(t)){
+    public static <T> void copyIf(Predicate<T> pr, List<? extends T> source, List<? super T> destination) {
+//        source.forEach(t -> {
+//            if (pr.test(t)) {
+//                destination.add(t);
+//            }
+//        });
+        for (T t : source) {
+            if (pr.test(t)) {
                 destination.add(t);
             }
         }
     }
 }
-

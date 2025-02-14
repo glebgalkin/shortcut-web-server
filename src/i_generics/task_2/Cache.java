@@ -28,15 +28,15 @@ public class Cache<K, V> {
     private final int maxSize;
     private final LinkedHashMap<K, V> map;
 
-    public Cache(int n) {
-        this.maxSize = n;
-        map = new LinkedHashMap<>();
+    public Cache(int maxSize) {
+        this.maxSize = maxSize;
+        this.map = new LinkedHashMap<>();
     }
 
     public void put(K k, V v) {
         if (map.size() == maxSize) {
-            Map.Entry<K, V> first = map.firstEntry();
-            map.remove(first.getKey());
+            K key = map.firstEntry().getKey();
+            map.remove(key);
         }
         map.put(k, v);
     }
@@ -51,6 +51,12 @@ public class Cache<K, V> {
     }
 
     public void print() {
+//        System.out.println(map);
+
+//        map.forEach( (k, v) -> {
+//            System.out.println(k + ":" + v);
+//        });
+
         for (Map.Entry<K, V> e : map.entrySet()) {
             System.out.println(e.getKey() + ":" + e.getValue());
         }
