@@ -1,4 +1,4 @@
-package i_generics.task_1;
+package com.gleb.generics.filter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,7 +14,7 @@ import java.util.function.Predicate;
 Метод должен копировать элементы из источника в назначение, если они удовлетворяют условию.
 
  */
-public class Solution {
+public class Filter {
     public static void main(String[] args) {
         List<Number> numbers = List.of(15, 12.45, 12F);
         List<Number> copy = new ArrayList<>();
@@ -28,11 +28,6 @@ public class Solution {
     }
 
     public static <T> void copyIf(Predicate<T> pr, List<? extends T> source, List<? super T> destination) {
-//        source.forEach(t -> {
-//            if (pr.test(t)) {
-//                destination.add(t);
-//            }
-//        });
         for (T t : source) {
             if (pr.test(t)) {
                 destination.add(t);
