@@ -23,3 +23,7 @@ tasks.withType<Jar> {
         attributes["Main-Class"] = "com.gleb.web.server.WebServer"
     }
 }
+
+tasks.test {
+    useJUnitPlatform() // Ensures JUnit 5 is used
+}

@@ -55,21 +55,5 @@ public class Cache<K, V> {
             System.out.println(e.getKey() + ":" + e.getValue());
         }
     }
-
-    public static void main(String[] args) {
-        Cache<String, Integer> firstCache = new Cache<>(2);
-        firstCache.put("Hello", 1);
-        firstCache.put("World", 2);
-        firstCache.put("Web", 3);
-        firstCache.print();
-
-        System.out.println();
-        Cache<Double, Character> secondCache = new Cache<>(3);
-        secondCache.put(12.344, 'A');
-        secondCache.put(1.57777, 'W');
-        secondCache.put(99_111.22, 'C');
-        secondCache.put(0.000, 'L');
-        secondCache.print();
-    }
 }
 

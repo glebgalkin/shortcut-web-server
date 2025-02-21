@@ -15,17 +15,6 @@ import java.util.function.Predicate;
 
  */
 public class Filter {
-    public static void main(String[] args) {
-        List<Number> numbers = List.of(15, 12.45, 12F);
-        List<Number> copy = new ArrayList<>();
-        copyIf((n) -> n.intValue() / 2 == 6, numbers, copy);
-        System.out.println(copy);
-
-        List<String> strings = List.of("Hello", "World", "Wide", "Web", "Sun");
-        List<String> sCopy = new ArrayList<>();
-        copyIf((s) -> s.startsWith("W"), strings, sCopy);
-        System.out.println(sCopy);
-    }
 
     public static <T> void copyIf(Predicate<T> pr, List<? extends T> source, List<? super T> destination) {
         for (T t : source) {

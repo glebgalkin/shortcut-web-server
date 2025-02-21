@@ -12,7 +12,6 @@ public class WebServer {
     public static void main(String[] args) throws IOException {
         try (ServerSocket serverSocket = new ServerSocket(PORT)) {
             System.out.println("Server started at port " + PORT);
-            System.out.println("Helloooooooooooo");
 
             while (true) {
                 Socket socket = serverSocket.accept();
