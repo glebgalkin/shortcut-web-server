@@ -1,11 +1,11 @@
-package com.gleb.web.server;
+package com.gleb.web.server.server;
 
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.nio.charset.StandardCharsets;
 
-public class WebServer {
+public class Ref {
 
     private static final int PORT = 8080;
 
@@ -20,6 +20,7 @@ public class WebServer {
                 BufferedReader reader = new BufferedReader(
                         new InputStreamReader(
                                 socket.getInputStream(), StandardCharsets.UTF_8));
+
                 PrintWriter writer = new PrintWriter(socket.getOutputStream(),
                         false, StandardCharsets.UTF_8);
 
@@ -36,7 +37,7 @@ public class WebServer {
                 TODO 2. Подумать над архитектурой сервера и разделить код по нескольким классам, чтобы каждый из классов
                 TODO      отвечал за какую-то минимальную функциональность
                  */
-                writer.println("HTTP/1.1 200 OK");
+                writer.print("HTTP/1.1 200 OK");
                 writer.println("Content-Type: text/html;UTF-8");
                 writer.println();
                 writer.println("<h1>Hello</h1>");

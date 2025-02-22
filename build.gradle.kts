@@ -15,7 +15,7 @@ dependencies {
 }
 
 application {
-    mainClass.set("com.gleb.web.server.WebServer") // Change to your actual main class
+    mainClass.set("com.gleb.web.server.Main") // Change to your actual main class
 }
 
 tasks.withType<Jar> {
