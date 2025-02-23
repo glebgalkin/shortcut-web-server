@@ -11,7 +11,7 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.logging.Logger;
 
-public class WebServerImpl implements WebServer {
+class WebServerImpl implements WebServer {
 
     private static final Logger logger = Logger.getLogger(WebServerImpl.class.getName());
 
