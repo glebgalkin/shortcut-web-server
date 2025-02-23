@@ -5,15 +5,21 @@ import java.net.Socket;
 import java.nio.file.Files;
 
 public class ResponseManagerImpl implements ResponseManager {
+
+    // TODO try to make domain class for the response
+    // TODO socket could be class field. We can have separate response manager for every connection
     @Override
     public void sendFile(Socket socket, File file) throws IOException {
         OutputStream outputStream = socket.getOutputStream();
         PrintWriter writer = new PrintWriter(outputStream, true);
 
         buildResponseStatus(writer, Status.OK);
+        // TODO try to send content type based on file extension
         addHeader(writer, Header.CONTENT_TYPE.getName(), Header.ContentType.OCTET_STREAM.getName());
         addHeader(writer, Header.CONTENT_LENGTH.getName(), String.valueOf(file.length()));
         addNewLine(writer);
+        // TODO this class shall be responsible only for response send through the network
+        //  no work with file system shall be here
         addFileToResponse(file, outputStream);
         sendResponse(outputStream);
     }

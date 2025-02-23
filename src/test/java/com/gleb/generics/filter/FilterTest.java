@@ -11,10 +11,14 @@ public class FilterTest {
 
     @Test
     public void copyListIfEven(){
+        // given
         List<Number> numbers = List.of(15, 12, 17, 19, 21, 23);
         List<Number> result = new ArrayList<>();
+
+        // when
         Filter.copyIf((number ) -> number.intValue() % 2 == 0, numbers, result);
 
+        // then
         assertEquals(1, result.size());
         Number n = result.getFirst();
         assertEquals(12, n.intValue());

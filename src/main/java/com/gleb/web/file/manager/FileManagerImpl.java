@@ -12,12 +12,17 @@ import java.util.logging.Logger;
 public class FileManagerImpl implements FileManager {
 
     private static final Logger logger = Logger.getLogger(FileManagerImpl.class.getName());
+
+    // TODO default error pages we could store in application resources
     private static final String DEFAULT_FILE = "index.html";
     private static final String INTERNAL_SERVER_ERROR = "503.html";
     private static final String FILE_NOT_FOUND = "404.html";
+    // TODO why it's hardcoded here?
     private static final Path defaultPath = Paths.get("").toAbsolutePath().resolve("public/default").normalize();
     private static final Path filesPath = Paths.get("").toAbsolutePath().resolve("public/files").normalize();
 
+    // TODO probably it's better to have two methods. One to check if file exists and second one
+    //   to return a IO stream to read the file
     public File getFile(String relativePath) throws FileNotFoundException {
         if (relativePath.equals("/") || relativePath.isEmpty()) return getDefaultFile();
         if (relativePath.startsWith("/")) relativePath = relativePath.substring(1);
