@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🔥 LEGENDARY Web Server 🔥</title>
+    <style>
+        body {
+            font-family: "Comic Sans MS", cursive, sans-serif;
+            background: linear-gradient(-45deg, #ff0000, #ff8c00, #ffff00, #00ff00, #0000ff, #8a2be2);
+            background-size: 400% 400%;
+            animation: gradientShift 5s ease infinite;
+            text-align: center;
+            padding: 50px;
+            color: white;
+            overflow: hidden;
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        h1 {
+            font-size: 3.5em;
+            text-shadow: 4px 4px 8px rgba(0,0,0,0.5);
+            animation: dramaticEntrance 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes dramaticEntrance {
+            0% { transform: scale(1); }
+            100% { transform: scale(1.05); }
+        }
+
+        .resources {
+            margin-top: 30px;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            display: inline-block;
+        }
+
+        .resources a {
+            display: block;
+            color: white;
+            text-decoration: none;
+            font-size: 1.5em;
+            margin: 10px 0;
+            padding: 15px;
+            border-radius: 5px;
+            background: rgba(0, 0, 0, 0.6);
+            transition: background 0.3s, transform 0.2s;
+            position: relative;
+            overflow: hidden;
+            animation: shake 1.5s ease-in-out infinite alternate-reverse;
+        }
+
+        @keyframes shake {
+            0% { transform: rotate(-1deg); }
+            100% { transform: rotate(1deg); }
+        }
+
+        .resources a:hover {
+            background: rgba(255, 255, 255, 0.9);
+            color: black;
+            transform: scale(1.1) rotate(5deg);
+            animation: floatyButton 0.5s ease-in-out infinite alternate;
+        }
+
+        @keyframes floatyButton {
+            0% { transform: scale(1.1) rotate(5deg) translateY(0px); }
+            100% { transform: scale(1.15) rotate(-5deg) translateY(-5px); }
+        }
+
+        .footer {
+            margin-top: 50px;
+            font-size: 1.1em;
+            font-weight: bold;
+            text-shadow: 2px 2px 5px black;
+            animation: footerWiggle 3s infinite alternate ease-in-out;
+        }
+
+        @keyframes footerWiggle {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(3deg); }
+        }
+
+        /* Random Text Changing Magic */
+        .resources a:hover::after {
+            content: attr(data-alt-text);
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 1.8em;
+            color: red;
+            text-shadow: 2px 2px 5px black;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+<h1>🚀 WELCOME TO THE MOST POWERFUL WEB SERVER OF ALL TIME 🚀</h1>
+<p>Prepare yourself. The files you are about to download may change your life forever. 🌍💥</p>
+
+<div class="resources">
+    <a href="santa.jpg" type="image/jpeg">🎅 Download Santa.jpg</a>
+    <a href="surprise/song.mp3" type="audio/mpeg">🎵 Download Surprise Song.mp3</a>
+</div>
+
+<p class="footer">✨ Powered by highly advanced potato technology. 🥔✨</p>
+</body>
+</html>
