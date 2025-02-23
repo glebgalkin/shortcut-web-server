@@ -4,7 +4,7 @@ public enum Header {
     CONTENT_TYPE("Content-Type"),
     CONTENT_LENGTH("Content-Length");
 
-    private String name;
+    private final String name;
 
     Header(String name) {
         this.name = name;
@@ -18,7 +18,7 @@ public enum Header {
         TEXT_HTML("text/html;UTF-8"),
         OCTET_STREAM("application/octet-stream");
 
-        private String name;
+        private final String name;
 
         ContentType(String name) {
             this.name = name;

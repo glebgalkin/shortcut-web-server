@@ -15,12 +15,12 @@ dependencies {
 }
 
 application {
-    mainClass.set("com.gleb.web.server.Main") // Change to your actual main class
+    mainClass.set("com.gleb.web.WebServerApplication")
 }
 
 tasks.withType<Jar> {
     manifest {
-        attributes["Main-Class"] = "com.gleb.web.server.WebServer"
+        attributes["Main-Class"] = "com.gleb.web.WebServerApplication"
     }
 }
 

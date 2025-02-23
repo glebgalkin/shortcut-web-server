@@ -6,7 +6,7 @@ public enum Status {
     NOT_FOUND("HTTP/1.1 404 Not Found"),
     SERVICE_UNAVAILABLE("HTTP/1.1 503 Service Unavailable");
 
-    private String status;
+    private final String status;
 
     Status(String status) {
         this.status = status;
