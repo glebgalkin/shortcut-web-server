@@ -1,10 +1,8 @@
 package com.gleb.web.server;
 
-import com.gleb.web.parser.FileManager;
-import com.gleb.web.reader.InputReader;
-import com.gleb.web.reader.InputReaderImpl;
+import com.gleb.web.file.manager.FileManager;
+import com.gleb.web.request.RequestParser;
 import com.gleb.web.response.ResponseManager;
-import com.gleb.web.response.ResponseManagerImpl;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -18,20 +16,17 @@ public class WebServerImpl implements WebServer {
     private static final Logger logger = Logger.getLogger(WebServerImpl.class.getName());
 
     private final int PORT;
-    private InputReader inputReader;
-    private ResponseManager responseManager;
+    private final RequestParser requestParser;
+    private final ResponseManager responseManager;
+    private final FileManager fileManager;
 
-
-    public WebServerImpl() {
-        this.PORT = 8080;
-        this.inputReader = new InputReaderImpl();
-        this.responseManager = new ResponseManagerImpl();
-    }
-
-    public WebServerImpl(int PORT) {
+    public WebServerImpl(int PORT, RequestParser requestParser,
+                         ResponseManager responseManager,
+                         FileManager fileManager) {
         this.PORT = PORT;
-        this.inputReader = new InputReaderImpl();
-        this.responseManager = new ResponseManagerImpl();
+        this.requestParser = requestParser;
+        this.responseManager = responseManager;
+        this.fileManager = fileManager;
     }
 
     @Override
@@ -41,9 +36,9 @@ public class WebServerImpl implements WebServer {
 
             while (true) {
                 Socket socket = serverSocket.accept();
-                String requestedFileName = inputReader.parseFilePath(socket);
+                String requestedFileName = requestParser.parseFilePath(socket);
                 try {
-                    File file = FileManager.getFile(requestedFileName);
+                    File file = fileManager.getFile(requestedFileName);
                     responseManager.sendFile(socket, file);
 
                 } catch (FileNotFoundException e) {
@@ -63,20 +58,20 @@ public class WebServerImpl implements WebServer {
     }
 
     private void sendFileNotFoundResponse(Socket socket, String requestedFileName) throws IOException {
-        logger.info("Attempting to send file not found response...");
         try{
-            String responseBody = FileManager.getFileNotFoundTemplate(requestedFileName);
+            String responseBody = fileManager.get404File(requestedFileName);
             responseManager.sendFileNotFoundResponse(socket, responseBody);
+            logger.info("Sent File Not Found response.");
         } catch (IOException e) {
             sendInternalErrorResponse(socket);
         }
     }
 
     private void sendInternalErrorResponse(Socket socket){
-        logger.info("Attempting to send Internal Server Error Response...");
         try {
-            File file = FileManager.getInternalErrorFile();
+            File file = fileManager.get503File();
             responseManager.sendInternalServerErrorResponse(socket, file);
+            logger.info("Sent Internal Server Error Response.");
 
         } catch (IOException exception) {
             logger.severe("Unsuccessful 503 response attempt.");

@@ -1,4 +1,4 @@
-package com.gleb.web.reader;
+package com.gleb.web.request;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -7,8 +7,8 @@ import java.net.Socket;
 import java.nio.charset.StandardCharsets;
 import java.util.logging.Logger;
 
-public class InputReaderImpl implements InputReader {
-    private static final Logger logger = Logger.getLogger(InputReaderImpl.class.getName());
+public class RequestParserImpl implements RequestParser {
+    private static final Logger logger = Logger.getLogger(RequestParserImpl.class.getName());
 
     @Override
     public String parseFilePath(Socket socket) throws IOException {

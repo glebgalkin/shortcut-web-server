@@ -1,9 +1,9 @@
-package com.gleb.web.reader;
+package com.gleb.web.request;
 
 import java.io.IOException;
 import java.net.Socket;
 
-public interface InputReader {
+public interface RequestParser {
 
     String parseFilePath(Socket socket) throws IOException;
 }
