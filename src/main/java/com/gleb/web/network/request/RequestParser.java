@@ -1,4 +1,4 @@
-package com.gleb.web.request;
+package com.gleb.web.network.request;
 
 import java.io.IOException;
 import java.net.Socket;

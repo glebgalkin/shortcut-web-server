@@ -1,4 +1,4 @@
-package com.gleb.web.response;
+package com.gleb.web.network.response.builder;
 
 public enum Status {
     OK("HTTP/1.1 200 OK"),
@@ -6,13 +6,13 @@ public enum Status {
     NOT_FOUND("HTTP/1.1 404 Not Found"),
     SERVICE_UNAVAILABLE("HTTP/1.1 503 Service Unavailable");
 
-    private final String status;
+    private final String name;
 
-    Status(String status) {
-        this.status = status;
+    Status(String name) {
+        this.name = name;
     }
 
-    public String getStatus() {
-        return status;
+    public String getName() {
+        return name;
     }
 }

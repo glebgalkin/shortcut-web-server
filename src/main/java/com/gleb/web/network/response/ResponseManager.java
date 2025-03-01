@@ -1,4 +1,4 @@
-package com.gleb.web.response;
+package com.gleb.web.network.response;
 
 import java.io.File;
 import java.io.IOException;

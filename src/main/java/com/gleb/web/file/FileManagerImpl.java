@@ -1,4 +1,4 @@
-package com.gleb.web.file.manager;
+package com.gleb.web.file;
 
 import java.io.File;
 import java.io.FileNotFoundException;
