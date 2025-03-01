@@ -1,4 +1,4 @@
-package com.gleb.web.network.response.builder;
+package com.gleb.web.network.response.util;
 
 import java.io.File;
 import java.io.IOException;
@@ -26,7 +26,7 @@ public class HttpResponseBuilder {
 
     private static String getContentType(File file) throws IOException {
         String contentType = Files.probeContentType(file.toPath());
-        if(contentType.contains("html")) return "text/html; charset=UTF-8";
+        if(contentType.contains("html")) return Header.ContentType.TEXT_HTML.getName();
         return contentType;
     }
 }

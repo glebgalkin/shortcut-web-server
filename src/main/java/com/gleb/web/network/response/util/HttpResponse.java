@@ -1,4 +1,4 @@
-package com.gleb.web.network.response.builder;
+package com.gleb.web.network.response.util;
 
 import lombok.Data;
 

@@ -22,7 +22,7 @@ public class PathResolver {
     }
 
     private static Path getRequestedFilePath(String path){
-        return Paths.get("").toAbsolutePath().resolve(ConfigLoader.get("directory.files")).resolve(path);
+        return Paths.get(ConfigLoader.get("directory.files"), path).toAbsolutePath().normalize();
     }
 
     private static boolean isDefaultPath(String path){

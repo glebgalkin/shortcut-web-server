@@ -1,4 +1,9 @@
-package com.gleb.web.network.response.builder;
+package com.gleb.web.network.response;
+
+import com.gleb.web.network.response.util.ByteResponseBuilder;
+import com.gleb.web.network.response.util.HttpResponse;
+import com.gleb.web.network.response.util.HttpResponseBuilder;
+import com.gleb.web.network.response.util.Status;
 
 import java.io.File;
 import java.io.IOException;

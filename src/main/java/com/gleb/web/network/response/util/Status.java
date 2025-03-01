@@ -1,4 +1,4 @@
-package com.gleb.web.network.response.builder;
+package com.gleb.web.network.response.util;
 
 public enum Status {
     OK("HTTP/1.1 200 OK"),

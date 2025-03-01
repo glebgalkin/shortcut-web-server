@@ -14,6 +14,14 @@ dependencies {
     testImplementation("org.junit.jupiter:junit-jupiter:5.8.1")
     compileOnly("org.projectlombok:lombok:1.18.36")
     annotationProcessor("org.projectlombok:lombok:1.18.36")
+
+    // SLF4J API
+    implementation("org.slf4j:slf4j-api:2.0.12")
+
+    // Log4j (Logging Implementation for SLF4J)
+    implementation("org.apache.logging.log4j:log4j-api:2.24.3")
+    implementation("org.apache.logging.log4j:log4j-core:2.24.3")
+    implementation("org.apache.logging.log4j:log4j-slf4j2-impl:2.24.3")
 }
 
 application {
