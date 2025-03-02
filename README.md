@@ -10,7 +10,7 @@
 Shortcut Web Server is a lightweight, **high-performance HTTP server** written in Java.  
 It supports **multithreading, custom logging, and dynamic request handling**—perfect for building microservices, proxies, or learning server internals.
 
-### Demonstration
+### 💀 Demonstration
 ![Shortcut Web Server Demo](assets/demonstration.gif)
 
 ### 🚀 Key Features
