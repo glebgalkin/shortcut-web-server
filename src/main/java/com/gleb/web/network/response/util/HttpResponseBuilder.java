@@ -1,17 +1,18 @@
 package com.gleb.web.network.response.util;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.util.HashMap;
 import java.util.Map;
 
 public class HttpResponseBuilder {
-    public static HttpResponse buildResponse(Status status, File file) throws IOException {
+    public static HttpResponse build(Status status, File file) throws IOException {
         HttpResponse httpResponse = new HttpResponse();
         httpResponse.setStatus(status.getName());
         httpResponse.setHeaders(getHeaders(file));
-        httpResponse.setBody(file);
+        httpResponse.setBody(new FileInputStream(file));
         return httpResponse;
     }
 

@@ -5,7 +5,8 @@ import com.gleb.web.file.PathResolver;
 import com.gleb.web.network.NetworkFactory;
 import com.gleb.web.network.NetworkService;
 import com.gleb.web.network.request.HttpRequest;
-import com.gleb.web.network.response.ResponseBuilder;
+import com.gleb.web.network.response.util.HttpResponse;
+import com.gleb.web.network.response.util.HttpResponseBuilder;
 import com.gleb.web.network.response.util.Status;
 import lombok.extern.slf4j.Slf4j;
 
@@ -48,8 +49,8 @@ public class ClientHandlerImpl implements ClientHandler {
         Path path = PathResolver.getFilePath(request.getPath());
         File file = FileUtil.getFile(path);
 
-        byte[] response = ResponseBuilder.build(Status.OK, file);
-        networkService.sendResponse(response);
+        HttpResponse httpResponse = HttpResponseBuilder.build(Status.OK, file);
+        networkService.sendResponse(httpResponse);
     }
 
     private void closeSocketConnection() {
@@ -64,8 +65,8 @@ public class ClientHandlerImpl implements ClientHandler {
         Path path = PathResolver.getFileNotFoundPath();
         try {
             File file = FileUtil.getFile(path);
-            byte[] response = ResponseBuilder.build(Status.NOT_FOUND, file);
-            networkService.sendResponse(response);
+            HttpResponse httpResponse = HttpResponseBuilder.build(Status.NOT_FOUND, file);
+            networkService.sendResponse(httpResponse);
         } catch (IOException e) {
             log.error("I/O Error sending 404 response with path: {}, error: {}", path, e.getMessage());
             log.info("Sending 503 response.");
@@ -77,8 +78,8 @@ public class ClientHandlerImpl implements ClientHandler {
         try {
             Path path = PathResolver.getInternalServerErrorPath();
             File file = FileUtil.getFile(path);
-            byte[] response = ResponseBuilder.build(Status.SERVICE_UNAVAILABLE, file);
-            networkService.sendResponse(response);
+            HttpResponse httpResponse = HttpResponseBuilder.build(Status.SERVICE_UNAVAILABLE, file);
+            networkService.sendResponse(httpResponse);
         } catch (IOException e) {
             log.error("I/O Error sending 503 response: {}", e.getMessage());
         }

@@ -1,20 +1,12 @@
 package com.gleb.web.network.response.util;
 
-import java.io.File;
-import java.io.IOException;
-import java.nio.file.Files;
 import java.util.Map;
 
 public class ByteResponseBuilder {
-    public static byte[] build(HttpResponse response) throws IOException {
-        String statusAndHeaders = getStatusAndHeadersAsString(response);
-        byte[] headerBytes = statusAndHeaders.getBytes();
-        byte[] fileBytes = response.getBody() != null ? getFileBytes(response.getBody()) : new byte[0];
 
-        byte[] fullResponse = new byte[headerBytes.length + fileBytes.length];
-        System.arraycopy(headerBytes, 0, fullResponse, 0, headerBytes.length);
-        System.arraycopy(fileBytes, 0, fullResponse, headerBytes.length, fileBytes.length);
-        return fullResponse;
+    public static byte[] getStatusAndHeadersAsBytes(HttpResponse response){
+        String statusAndHeaders = getStatusAndHeadersAsString(response);
+        return statusAndHeaders.getBytes();
     }
 
     private static String getStatusAndHeadersAsString(HttpResponse response){
@@ -29,9 +21,5 @@ public class ByteResponseBuilder {
         }
         sb.append("\n");
         return sb.toString();
-    }
-
-    private static byte[] getFileBytes(File file) throws IOException {
-        return Files.readAllBytes(file.toPath());
     }
 }
