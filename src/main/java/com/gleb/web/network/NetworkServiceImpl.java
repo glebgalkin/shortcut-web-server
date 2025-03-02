@@ -39,6 +39,7 @@ public class NetworkServiceImpl implements NetworkService {
     private void writeBody(InputStream inputStream, OutputStream outputStream) throws IOException {
         if (inputStream == null) return;
 
+        // TODO use inputStream.transferTo()
         byte[] buffer = new byte[8192];
         int bytesRead;
         while ((bytesRead = inputStream.read(buffer)) != -1) {

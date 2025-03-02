@@ -8,7 +8,7 @@ import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.nio.charset.StandardCharsets;
 
-public class NetworkUtil {
+public final class NetworkUtil {
     public static String getRawRequest(InputStream inputStream) throws IOException {
         BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream, StandardCharsets.UTF_8));
         StringBuilder sb = new StringBuilder();

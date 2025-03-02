@@ -8,6 +8,8 @@ import java.util.Random;
 
 @Slf4j
 public class PrettyPrinter {
+
+    // TODO move to resource file
     public static void logBanner() {
         String banner = "\n" +
                 "\u001B[31m _____ _                _             _     _    _      _       _____                          \n" +

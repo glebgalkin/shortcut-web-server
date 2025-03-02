@@ -15,6 +15,7 @@ public class HttpResponseBuilderTest {
     @Test
     public void buildResponse() throws IOException {
         // given
+        // TODO for such tests it's beter to store files in the test resources
         File tempFile = Files.createTempFile("test", ".html").toFile();
         Files.writeString(tempFile.toPath(), "<html><body>Test</body></html>");
 

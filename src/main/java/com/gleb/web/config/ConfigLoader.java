@@ -10,11 +10,11 @@ public class ConfigLoader {
     static {
         try (InputStream input = ConfigLoader.class.getClassLoader().getResourceAsStream("config.properties")) {
             if (input == null) {
-                throw new RuntimeException("Sorry, unable to find config.properties");
+                throw new IllegalArgumentException("Sorry, unable to find config.properties");
             }
             properties.load(input);
         } catch (IOException e) {
-            throw new RuntimeException("Error loading configuration file", e);
+            throw new IllegalArgumentException("Error loading configuration file", e);
         }
     }
 

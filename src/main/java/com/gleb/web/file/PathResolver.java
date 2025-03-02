@@ -13,6 +13,7 @@ public class PathResolver {
         return getRequestedFilePath(path);
     }
 
+    // TODO it's better not to use ConfigLoader directly here. Why not to store paths in some fields
     public static Path getFileNotFoundPath() {
         return Paths.get("").toAbsolutePath().resolve(ConfigLoader.get("directory.not.found"));
     }

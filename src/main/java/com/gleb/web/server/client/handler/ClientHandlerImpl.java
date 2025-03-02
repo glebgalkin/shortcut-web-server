@@ -47,6 +47,8 @@ public class ClientHandlerImpl implements ClientHandler {
 
     private void handleRequest() throws IOException {
         HttpRequest request = networkService.getRequest();
+        // TODO probably it's better to create one file service which is fully responsible for
+        //   dealing with file system
         Path path = PathResolver.getFilePath(request.getPath());
         File file = FileUtil.getFile(path);
 
