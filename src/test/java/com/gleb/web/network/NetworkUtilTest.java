@@ -1,5 +1,6 @@
 package com.gleb.web.network;
 
+import com.gleb.web.network.util.NetworkUtil;
 import org.junit.jupiter.api.Test;
 
 import java.io.ByteArrayInputStream;

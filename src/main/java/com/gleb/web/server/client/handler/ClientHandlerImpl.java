@@ -1,4 +1,4 @@
-package com.gleb.web.server.client;
+package com.gleb.web.server.client.handler;
 
 import com.gleb.web.file.FileUtil;
 import com.gleb.web.file.PathResolver;

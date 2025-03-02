@@ -1,6 +1,6 @@
 package com.gleb.web.server;
 
-import com.gleb.web.server.client.ClientHandler;
+import com.gleb.web.server.client.handler.ClientHandler;
 import com.gleb.web.server.client.ClientHandlerFactory;
 import lombok.extern.slf4j.Slf4j;
 

@@ -1,4 +1,4 @@
-package com.gleb.web.server.client;
+package com.gleb.web.server.client.handler;
 
 public interface ClientHandler {
     void handleClient();

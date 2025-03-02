@@ -4,6 +4,7 @@ import com.gleb.web.network.request.HttpRequest;
 import com.gleb.web.network.request.RequestMapper;
 import com.gleb.web.network.response.ByteResponseConverter;
 import com.gleb.web.network.response.HttpResponse;
+import com.gleb.web.network.util.NetworkUtil;
 
 import java.io.IOException;
 import java.io.InputStream;
