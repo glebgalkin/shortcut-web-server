@@ -1,9 +1,14 @@
 package com.gleb.web.config;
 
+import lombok.extern.slf4j.Slf4j;
+
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 import java.util.Random;
 
+@Slf4j
 public class PrettyPrinter {
-    public static void printBanner() {
+    public static void logBanner() {
         String banner = "\n" +
                 "\u001B[31m _____ _                _             _     _    _      _       _____                          \n" +
                 "/  ___| |              | |           | |   | |  | |    | |     /  ___|                         \n" +
@@ -25,5 +30,12 @@ public class PrettyPrinter {
     public static String getRandomRocketEmoji() {
         String[] rockets = {"🚀", "🛸", "🔥", "💨", "✨", "🌟"};
         return rockets[new Random().nextInt(rockets.length)];
+    }
+
+    public static  void logSuccessfulStart(String bindAddress, int port) throws UnknownHostException {
+        log.info("{} started at: http://localhost:{}", getAppName(), port);
+        String localIp = InetAddress.getLocalHost().getHostAddress();
+        log.info("📡 Network:    http://{}:{}", localIp, port);
+        log.info("🔗 Bound to:   http://{}:{}", bindAddress, port);
     }
 }

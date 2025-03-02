@@ -14,6 +14,7 @@ It supports **multithreading, custom logging, and dynamic request handling**—p
 - ✅ **Multithreaded Request Handling** (Custom Named Threads 🏆)
 - ✅ **Supports Custom Request Handlers**
 - ✅ **Configurable via `config.properties`**
+- ✅ **Configurable Network Binding** (Supports localhost or external access via `0.0.0.0`)
 - ✅ **Log Request Processing with Named Threads (Napoleon Bonaparte? 😆)**
 
 ---

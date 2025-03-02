@@ -8,7 +8,7 @@ import java.util.concurrent.Executors;
 public final class WebServerFactory {
 
     public static WebServer create() {
-        return new WebServerImpl(getPort(), Executors.newFixedThreadPool(getThreads(),
+        return new WebServerImpl(getPort(), getServerBind(), Executors.newFixedThreadPool(getThreads(),
                 new NamedThreadFactory()));
     }
 
@@ -18,5 +18,9 @@ public final class WebServerFactory {
 
     private static int getThreads() {
         return Integer.parseInt(ConfigLoader.get("server.threads"));
+    }
+
+    private static String getServerBind(){
+        return ConfigLoader.get("server.bind");
     }
 }

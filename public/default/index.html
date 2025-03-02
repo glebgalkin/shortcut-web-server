@@ -107,6 +107,22 @@
             to { opacity: 1; }
         }
     </style>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const favicons = [
+                "https://cdn-icons-png.flaticon.com/512/2826/2826437.png",  // Server icon
+                "https://cdn-icons-png.flaticon.com/512/599/599496.png",    // Lightning bolt
+                "https://cdn-icons-png.flaticon.com/512/1698/1698535.png",  // Terminal icon
+                "https://cdn-icons-png.flaticon.com/512/1046/1046857.png"   // Rocket
+            ];
+            const randomFavicon = favicons[Math.floor(Math.random() * favicons.length)];
+
+            let link = document.createElement("link");
+            link.rel = "icon";
+            link.href = randomFavicon;
+            document.head.appendChild(link);
+        });
+    </script>
 </head>
 <body>
 
