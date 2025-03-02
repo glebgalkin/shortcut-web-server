@@ -7,33 +7,33 @@ import java.nio.file.Paths;
 
 public class PathResolver {
 
-    public static Path getFilePath(String requestPath){
+    public static Path getFilePath(String requestPath) {
         String path = filterPath(requestPath);
-        if(isDefaultPath(path)) return getDefaultPath();
+        if (isDefaultPath(path)) return getDefaultPath();
         return getRequestedFilePath(path);
     }
 
-    public static Path getFileNotFoundPath(){
+    public static Path getFileNotFoundPath() {
         return Paths.get("").toAbsolutePath().resolve(ConfigLoader.get("directory.not.found"));
     }
 
-    public static Path getInternalServerErrorPath(){
+    public static Path getInternalServerErrorPath() {
         return Paths.get("").toAbsolutePath().resolve(ConfigLoader.get("directory.internal.error"));
     }
 
-    private static Path getRequestedFilePath(String path){
+    private static Path getRequestedFilePath(String path) {
         return Paths.get(ConfigLoader.get("directory.files"), path).toAbsolutePath().normalize();
     }
 
-    private static boolean isDefaultPath(String path){
+    private static boolean isDefaultPath(String path) {
         return path.isEmpty() || path.equals("/");
     }
 
-    private static Path getDefaultPath(){
+    private static Path getDefaultPath() {
         return Paths.get("").toAbsolutePath().resolve(ConfigLoader.get("directory.default"));
     }
 
-    private static String filterPath(String requestPath){
+    private static String filterPath(String requestPath) {
         return requestPath.split("\\?")[0];
     }
 }

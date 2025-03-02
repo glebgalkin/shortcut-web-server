@@ -15,7 +15,7 @@ public class FileUtil {
 
     private static void validateFileExist(Path path) throws FileNotFoundException {
         if (path == null || !Files.exists(path)) {
-            throw new FileNotFoundException("File does not exist: " + path);
+            throw new FileNotFoundException("Could not find the file with requested path: " + path);
         }
     }
 }

@@ -28,15 +28,10 @@ public class ClientHandlerImpl implements ClientHandler {
     public void handleClient() {
         NetworkService networkService = NetworkFactory.getNetworkService(socket);
         try {
-            HttpRequest request = networkService.getRequest();
-            Path path = PathResolver.getFilePath(request.getPath());
-            File file = FileUtil.getFile(path);
-
-            byte[] response = ResponseBuilder.build(Status.OK, file);
-            networkService.sendResponse(response);
+            handleRequest(networkService);
 
         } catch (FileNotFoundException e) {
-            log.info("Could not find the file with requested path: {}", e.getMessage());
+            log.info(e.getMessage());
             sendFileNotFoundResponse(networkService);
 
         } catch (IOException e) {
@@ -46,6 +41,15 @@ public class ClientHandlerImpl implements ClientHandler {
         } finally {
             closeSocketConnection();
         }
+    }
+
+    private void handleRequest(NetworkService networkService) throws IOException {
+        HttpRequest request = networkService.getRequest();
+        Path path = PathResolver.getFilePath(request.getPath());
+        File file = FileUtil.getFile(path);
+
+        byte[] response = ResponseBuilder.build(Status.OK, file);
+        networkService.sendResponse(response);
     }
 
     private void closeSocketConnection() {

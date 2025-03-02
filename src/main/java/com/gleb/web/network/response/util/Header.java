@@ -15,7 +15,7 @@ public enum Header {
         return name;
     }
 
-    enum ContentType {
+    public enum ContentType {
         TEXT_HTML("text/html;UTF-8"),
         OCTET_STREAM("application/octet-stream");
 

@@ -30,10 +30,14 @@ public class RequestMapper {
 
     private static Map<String, String> getHeaders(String[] rawHeaders){
         Map<String, String> headers = new HashMap<>();
-        for(String rawLine : rawHeaders){
-            String[] headerLine = rawLine.split(" ");
-            headers.put(headerLine[0].trim(), headerLine[1].trim());
+        for(int i = 1; i < rawHeaders.length; i++){
+            String[] headerLine = rawHeaders[i].split(" ");
+            headers.put(trimHeader(headerLine), headerLine[1].trim());
         }
         return headers;
+    }
+
+    private static String trimHeader(String[] headerLine){
+        return headerLine[0].substring(0, headerLine[0].length()-1).trim();
     }
 }
