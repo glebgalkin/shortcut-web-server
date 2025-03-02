@@ -1,0 +1,29 @@
+package com.gleb.web.config;
+
+import java.util.Random;
+
+public class PrettyPrinter {
+    public static void printBanner() {
+        String banner = "\n" +
+                "\u001B[31m _____ _                _             _     _    _      _       _____                          \n" +
+                "/  ___| |              | |           | |   | |  | |    | |     /  ___|                         \n" +
+                "\\ `--.| |__   ___  _ __| |_ ___ _   _| |_  | |  | | ___| |__   \\ `--.  ___ _ ____   _____ _ __ \n" +
+                " `--. | '_ \\ / _ \\| '__| __/ __| | | | __| | |/\\| |/ _ | '_ \\   `--. \\/ _ | '__\\ \\ / / _ | '__|\n" +
+                "/\\__/ | | | | (_) | |  | || (__| |_| | |_  \\  /\\  |  __| |_) | /\\__/ |  __| |   \\ V |  __| |   \n" +
+                "\\____/|_| |_|\\___/|_|   \\__\\___|\\__,_|\\__|  \\/  \\/ \\___|_.__/  \\____/ \\___|_|    \\_/ \\___|_|   \n" +
+                "                                                                                               \n" +
+                "                                                                                               \n\u001B[0m"; // Reset color
+        System.out.println(banner);
+    }
+
+
+    public static String getAppName() {
+        return String.format("%s\u001B[32m%s \u001B[0m%s", getRandomRocketEmoji(),
+                ConfigLoader.get("application.name"), getRandomRocketEmoji());
+    }
+
+    public static String getRandomRocketEmoji() {
+        String[] rockets = {"🚀", "🛸", "🔥", "💨", "✨", "🌟"};
+        return rockets[new Random().nextInt(rockets.length)];
+    }
+}

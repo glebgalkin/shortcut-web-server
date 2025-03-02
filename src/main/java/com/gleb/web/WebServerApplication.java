@@ -1,6 +1,5 @@
 package com.gleb.web;
 
-
 import com.gleb.web.server.WebServer;
 import com.gleb.web.server.WebServerFactory;
 
