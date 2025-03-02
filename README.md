@@ -1,3 +1,5 @@
+![Shortcut Web Server Logo](assets/logo.png)
+
 # 🚀 Shortcut Web Server
 *A fast, multithreaded HTTP server built in Java*
 
