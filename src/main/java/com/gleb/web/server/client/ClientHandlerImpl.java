@@ -5,9 +5,9 @@ import com.gleb.web.file.PathResolver;
 import com.gleb.web.network.NetworkFactory;
 import com.gleb.web.network.NetworkService;
 import com.gleb.web.network.request.HttpRequest;
-import com.gleb.web.network.response.util.HttpResponse;
-import com.gleb.web.network.response.util.HttpResponseBuilder;
-import com.gleb.web.network.response.util.Status;
+import com.gleb.web.network.response.HttpResponse;
+import com.gleb.web.network.response.HttpResponseBuilder;
+import com.gleb.web.network.response.Status;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.File;
@@ -20,31 +20,32 @@ import java.nio.file.Path;
 public class ClientHandlerImpl implements ClientHandler {
 
     private final Socket socket;
+    private final NetworkService networkService;
 
     public ClientHandlerImpl(Socket socket) {
         this.socket = socket;
+        this.networkService = NetworkFactory.getNetworkService(socket);
     }
 
     @Override
     public void handleClient() {
-        NetworkService networkService = NetworkFactory.getNetworkService(socket);
         try {
-            handleRequest(networkService);
+            handleRequest();
 
         } catch (FileNotFoundException e) {
             log.info(e.getMessage());
-            sendFileNotFoundResponse(networkService);
+            sendFileNotFoundResponse();
 
         } catch (IOException e) {
             log.error("I/O error occurred while handling request: {}", e.getMessage());
-            sendInternalErrorResponse(networkService);
+            sendInternalErrorResponse();
 
         } finally {
             closeSocketConnection();
         }
     }
 
-    private void handleRequest(NetworkService networkService) throws IOException {
+    private void handleRequest() throws IOException {
         HttpRequest request = networkService.getRequest();
         Path path = PathResolver.getFilePath(request.getPath());
         File file = FileUtil.getFile(path);
@@ -61,7 +62,7 @@ public class ClientHandlerImpl implements ClientHandler {
         }
     }
 
-    private void sendFileNotFoundResponse(NetworkService networkService) {
+    private void sendFileNotFoundResponse() {
         Path path = PathResolver.getFileNotFoundPath();
         try {
             File file = FileUtil.getFile(path);
@@ -70,18 +71,18 @@ public class ClientHandlerImpl implements ClientHandler {
         } catch (IOException e) {
             log.error("I/O Error sending 404 response with path: {}, error: {}", path, e.getMessage());
             log.info("Sending 503 response.");
-            sendInternalErrorResponse(networkService);
+            sendInternalErrorResponse();
         }
     }
 
-    private void sendInternalErrorResponse(NetworkService networkService) {
+    private void sendInternalErrorResponse() {
         try {
             Path path = PathResolver.getInternalServerErrorPath();
             File file = FileUtil.getFile(path);
             HttpResponse httpResponse = HttpResponseBuilder.build(Status.SERVICE_UNAVAILABLE, file);
             networkService.sendResponse(httpResponse);
         } catch (IOException e) {
-            log.error("I/O Error sending 503 response: {}", e.getMessage());
+            log.error("I/O Error sending 503 response. Request might be lost. Error: {}", e.getMessage());
         }
     }
 }

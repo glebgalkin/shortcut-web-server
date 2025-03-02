@@ -1,7 +1,7 @@
 package com.gleb.web.network;
 
 import com.gleb.web.network.request.HttpRequest;
-import com.gleb.web.network.response.util.HttpResponse;
+import com.gleb.web.network.response.HttpResponse;
 
 import java.io.IOException;
 

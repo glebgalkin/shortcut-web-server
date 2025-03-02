@@ -1,8 +1,8 @@
-package com.gleb.web.network.response.util;
+package com.gleb.web.network.response;
 
 import java.util.Map;
 
-public class ByteResponseBuilder {
+public class ByteResponseConverter {
 
     public static byte[] getStatusAndHeadersAsBytes(HttpResponse response){
         String statusAndHeaders = getStatusAndHeadersAsString(response);

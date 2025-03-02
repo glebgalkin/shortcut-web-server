@@ -1,6 +1,7 @@
 plugins {
     id("application")
     id("java")
+    id("com.github.spotbugs") version "6.1.6"
 }
 
 group = "com.gleb"

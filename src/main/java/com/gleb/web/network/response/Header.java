@@ -1,4 +1,4 @@
-package com.gleb.web.network.response.util;
+package com.gleb.web.network.response;
 
 public enum Header {
     CONTENT_TYPE("Content-Type"),

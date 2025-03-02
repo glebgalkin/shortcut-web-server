@@ -2,8 +2,8 @@ package com.gleb.web.network;
 
 import com.gleb.web.network.request.HttpRequest;
 import com.gleb.web.network.request.RequestMapper;
-import com.gleb.web.network.response.util.ByteResponseBuilder;
-import com.gleb.web.network.response.util.HttpResponse;
+import com.gleb.web.network.response.ByteResponseConverter;
+import com.gleb.web.network.response.HttpResponse;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -27,7 +27,7 @@ public class NetworkServiceImpl implements NetworkService {
     public void sendResponse(HttpResponse httpResponse) throws IOException {
         OutputStream outputStream = socket.getOutputStream();
 
-        byte[] statusAndHeaders = ByteResponseBuilder.getStatusAndHeadersAsBytes(httpResponse);
+        byte[] statusAndHeaders = ByteResponseConverter.getStatusAndHeadersAsBytes(httpResponse);
         outputStream.write(statusAndHeaders);
         writeBody(httpResponse.getBody(), outputStream);
 
