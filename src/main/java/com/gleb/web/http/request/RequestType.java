@@ -1,4 +1,4 @@
-package com.gleb.web.network.request;
+package com.gleb.web.http.request;
 
 public enum RequestType {
     GET,

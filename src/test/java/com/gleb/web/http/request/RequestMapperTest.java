@@ -1,4 +1,4 @@
-package com.gleb.web.network.request;
+package com.gleb.web.http.request;
 
 import org.junit.jupiter.api.Test;
 
@@ -16,7 +16,8 @@ public class RequestMapperTest {
                 "Accept: text/html\n";
 
         // when
-        HttpRequest request = RequestMapper.buildRequest(rawData);
+        RequestFactoryImpl requestFactory = new RequestFactoryImpl();
+        HttpRequest request = requestFactory.build(rawData);
 
         // then
         assertNotNull(request);

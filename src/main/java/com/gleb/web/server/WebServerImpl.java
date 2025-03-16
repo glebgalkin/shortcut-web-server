@@ -1,6 +1,6 @@
 package com.gleb.web.server;
 
-import com.gleb.web.network.util.NetworkUtil;
+import com.gleb.web.http.util.StringUtil;
 import com.gleb.web.server.client.handler.ClientHandler;
 import com.gleb.web.server.client.ClientHandlerFactory;
 import lombok.extern.slf4j.Slf4j;
@@ -38,7 +38,7 @@ class WebServerImpl implements WebServer {
 
     private ServerSocket getServerSocket() throws IOException {
         return new ServerSocket(port, 50,
-                NetworkUtil.parseIpString(bindAddress));
+                StringUtil.parseIpString(bindAddress));
     }
 
     private void handleRequest(Socket socket) {

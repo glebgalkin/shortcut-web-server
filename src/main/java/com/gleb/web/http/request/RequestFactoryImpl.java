@@ -1,10 +1,12 @@
-package com.gleb.web.network.request;
+package com.gleb.web.http.request;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public class RequestMapper {
-    public static HttpRequest buildRequest(String rawData){
+public class RequestFactoryImpl implements RequestFactory{
+
+    @Override
+    public HttpRequest build(String rawData){
         HttpRequest httpRequest = new HttpRequest();
 
         String[] lines = rawData.split("\n");

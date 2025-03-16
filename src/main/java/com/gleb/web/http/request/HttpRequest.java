@@ -1,4 +1,4 @@
-package com.gleb.web.network.request;
+package com.gleb.web.http.request;
 
 import lombok.Data;
 
