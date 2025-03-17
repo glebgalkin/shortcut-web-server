@@ -27,6 +27,7 @@ public class PrettyPrinter {
              BufferedReader reader = new BufferedReader(new InputStreamReader(is, StandardCharsets.UTF_8))) {
 
             String line;
+            // TODO reader.lines().collect(Collectors.joining("\n"));
             while ((line = reader.readLine()) != null) {
                 banner.append(line).append("\n");
             }

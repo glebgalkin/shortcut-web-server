@@ -9,3 +9,7 @@ Tasks after review
 4. Make a builder for server object to provide properties like port number from the code
 5. Use virtual threads
 6. Implement POST requests
+
+Task after review:
+1. Write as much unit tests as possible
+2. Write integration test
