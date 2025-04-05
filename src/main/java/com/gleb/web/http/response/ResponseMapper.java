@@ -7,9 +7,9 @@ import java.nio.file.Files;
 import java.util.HashMap;
 import java.util.Map;
 
-public class HttpResponseFactoryImpl implements HttpResponseFactory{
+public class ResponseMapper {
 
-    public HttpResponse build(Status status, File file) throws IOException {
+    public HttpResponse map(Status status, File file) throws IOException {
         HttpResponse httpResponse = new HttpResponse();
         httpResponse.setStatus(status.getName());
         httpResponse.setHeaders(getHeaders(file));

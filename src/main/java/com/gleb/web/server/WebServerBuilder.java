@@ -6,7 +6,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 public class WebServerBuilder {
-    private int port = 8080; // Default port
+    private int port = 8080;
     private String bindAddress = "127.0.0.1";
     private int threadPoolSize = 10;
     private ExecutorService executorService;

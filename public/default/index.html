@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Simple & Elegant Web Server</title>
     <style>
-        /* General Reset */
         * {
             margin: 0;
             padding: 0;
@@ -25,7 +24,6 @@
             padding: 20px;
         }
 
-        /* Typing Effect */
         .typing {
             font-size: 2.5em;
             font-weight: 600;
@@ -37,7 +35,6 @@
             animation: typing 2s steps(30, end) forwards, blink 0.7s infinite;
         }
 
-        /* Stop cursor blinking after typing finishes */
         .typing.done {
             border-right: none;
         }
@@ -51,7 +48,6 @@
             50% { border-color: transparent; }
         }
 
-        /* Smooth fade-in effects for other elements */
         p, .resources, .footer {
             opacity: 0;
             animation: fadeIn 1s ease-in-out forwards;
@@ -95,6 +91,21 @@
             border-color: #222;
         }
 
+        #drop-area {
+            border: 2px dashed #ccc;
+            padding: 30px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        #drop-area.dragover {
+            background-color: #f0f0f0;
+        }
+
+        #fileElem {
+            display: none;
+        }
+
         .footer {
             margin-top: 40px;
             font-size: 0.9em;
@@ -108,15 +119,14 @@
         }
     </style>
     <script>
-        document.addEventListener("DOMContentLoaded", function() {
+        document.addEventListener("DOMContentLoaded", function () {
             const favicons = [
-                "https://cdn-icons-png.flaticon.com/512/2826/2826437.png",  // Server icon
-                "https://cdn-icons-png.flaticon.com/512/599/599496.png",    // Lightning bolt
-                "https://cdn-icons-png.flaticon.com/512/1698/1698535.png",  // Terminal icon
-                "https://cdn-icons-png.flaticon.com/512/1046/1046857.png"   // Rocket
+                "https://cdn-icons-png.flaticon.com/512/2826/2826437.png",
+                "https://cdn-icons-png.flaticon.com/512/599/599496.png",
+                "https://cdn-icons-png.flaticon.com/512/1698/1698535.png",
+                "https://cdn-icons-png.flaticon.com/512/1046/1046857.png"
             ];
             const randomFavicon = favicons[Math.floor(Math.random() * favicons.length)];
-
             let link = document.createElement("link");
             link.rel = "icon";
             link.href = randomFavicon;
@@ -127,20 +137,69 @@
 <body>
 
 <h1 class="typing">✨ Welcome to Your Web Server ✨</h1>
-<p>Your files are ready for download.</p>
+<p>Upload a file below and watch the magic happen.</p>
 
-<div class="resources">
-    <a href="santa.jpg">🎅 Download Santa.jpg</a>
-    <a href="surprise/song.mp3">🎵 Download Surprise Song.mp3</a>
+<div class="resources" id="drop-area">
+    <p>📁 Drag & drop a file here or click to upload</p>
+    <input type="file" id="fileElem" accept="*">
+    <button onclick="fileElem.click()">Select File</button>
 </div>
 
 <p class="footer">Proudly served by your web server. ⚡</p>
 
 <script>
-    document.addEventListener("DOMContentLoaded", function() {
+    document.addEventListener("DOMContentLoaded", function () {
         setTimeout(() => {
             document.querySelector(".typing").classList.add("done");
-        }, 2000); // Matches the typing animation duration
+        }, 2000);
+
+        const dropArea = document.getElementById("drop-area");
+        const fileElem = document.getElementById("fileElem");
+
+        ["dragenter", "dragover", "dragleave", "drop"].forEach(eventName => {
+            dropArea.addEventListener(eventName, preventDefaults, false);
+        });
+
+        function preventDefaults(e) {
+            e.preventDefault();
+            e.stopPropagation();
+        }
+
+        dropArea.addEventListener("dragover", () => dropArea.classList.add("dragover"));
+        dropArea.addEventListener("dragleave", () => dropArea.classList.remove("dragover"));
+        dropArea.addEventListener("drop", () => dropArea.classList.remove("dragover"));
+
+        fileElem.addEventListener("change", () => {
+            if (fileElem.files.length > 0) {
+                uploadFile(fileElem.files[0]);
+            }
+        });
+
+        dropArea.addEventListener("drop", (e) => {
+            const file = e.dataTransfer.files[0];
+            if (file) {
+                uploadFile(file);
+            }
+        });
+
+        function uploadFile(file) {
+            fetch("/upload", {
+                method: "POST",
+                body: file,
+                headers: {
+                    "Content-Type": file.type || "application/octet-stream"
+                }
+            })
+                .then(res => res.text())
+                .then(html => {
+                    document.open();
+                    document.write(html);
+                    document.close();
+                })
+                .catch(err => {
+                    alert("❌ Upload error: " + err.message);
+                });
+        }
     });
 </script>
 

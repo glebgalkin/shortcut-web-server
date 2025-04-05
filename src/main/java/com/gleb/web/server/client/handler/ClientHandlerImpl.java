@@ -3,8 +3,9 @@ package com.gleb.web.server.client.handler;
 import com.gleb.web.file.FileService;
 import com.gleb.web.http.HttpHandler;
 import com.gleb.web.http.request.HttpRequest;
+import com.gleb.web.http.request.HttpMethod;
 import com.gleb.web.http.response.HttpResponse;
-import com.gleb.web.http.response.HttpResponseFactory;
+import com.gleb.web.http.response.ResponseMapper;
 import com.gleb.web.http.response.Status;
 import lombok.extern.slf4j.Slf4j;
 
@@ -19,15 +20,12 @@ public class ClientHandlerImpl implements ClientHandler {
     private final Socket socket;
     private final HttpHandler httpHandler;
     private final FileService fileService;
-    private final HttpResponseFactory httpResponseFactory;
 
     public ClientHandlerImpl(Socket socket, FileService fileService,
-                             HttpHandler httpHandler,
-                             HttpResponseFactory httpResponseFactory) {
+                             HttpHandler httpHandler) {
         this.socket = socket;
         this.httpHandler = httpHandler;
         this.fileService = fileService;
-        this.httpResponseFactory = httpResponseFactory;
     }
 
     @Override
@@ -50,10 +48,40 @@ public class ClientHandlerImpl implements ClientHandler {
 
     private void handleRequest() throws IOException {
         HttpRequest request = httpHandler.getRequest();
-        File file = fileService.getFile(request.getPath());
-        HttpResponse httpResponse = httpResponseFactory.build(Status.OK, file);
+        HttpResponse response = null;
+        if (isGetRequest(request)) {
+            response = handleGetRequest(request);
+        } else if (isPostRequest(request)) {
+            response = handlePostRequest();
+        }
 
-        httpHandler.sendResponse(httpResponse);
+        if (response != null) {
+            httpHandler.sendResponse(response);
+        }
+    }
+
+    private boolean isGetRequest(HttpRequest request) {
+        return request.getMethod().equals(HttpMethod.GET);
+    }
+
+    private boolean isPostRequest(HttpRequest request) {
+        return request.getMethod().equals(HttpMethod.POST);
+    }
+
+
+    private HttpResponse handleGetRequest(HttpRequest request) throws IOException {
+        File file = fileService.getFile(request.getPath());
+        return getHttpResponse(Status.OK, file);
+    }
+
+    private HttpResponse handlePostRequest() throws IOException {
+        File file = fileService.getFileUploaded();
+        return getHttpResponse(Status.OK, file);
+    }
+
+    private HttpResponse getHttpResponse(Status status, File file) throws IOException {
+        ResponseMapper mapper = new ResponseMapper();
+        return mapper.map(status, file);
     }
 
     private void closeSocketConnection() {
@@ -67,7 +95,7 @@ public class ClientHandlerImpl implements ClientHandler {
     private void sendFileNotFoundResponse() {
         try {
             File file = fileService.getFileNotFound();
-            HttpResponse httpResponse = httpResponseFactory.build(Status.NOT_FOUND, file);
+            HttpResponse httpResponse = getHttpResponse(Status.NOT_FOUND, file);
             httpHandler.sendResponse(httpResponse);
         } catch (IOException e) {
             log.error("I/O Error sending 404 response error: {}", e.getMessage());
@@ -79,7 +107,7 @@ public class ClientHandlerImpl implements ClientHandler {
     private void sendInternalErrorResponse() {
         try {
             File file = fileService.getInternalServerError();
-            HttpResponse httpResponse = httpResponseFactory.build(Status.SERVICE_UNAVAILABLE, file);
+            HttpResponse httpResponse = getHttpResponse(Status.SERVICE_UNAVAILABLE, file);
             httpHandler.sendResponse(httpResponse);
         } catch (IOException e) {
             log.error("I/O Error sending 503 response. Request might be lost. Error: {}", e.getMessage());

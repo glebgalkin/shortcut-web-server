@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload Complete</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Helvetica Neue", Arial, sans-serif;
+        }
+
+        body {
+            background: #f8f8f8;
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .typing {
+            font-size: 2.5em;
+            font-weight: 600;
+            color: #222;
+            white-space: nowrap;
+            overflow: hidden;
+            border-right: 3px solid #222;
+            width: 0;
+            animation: typing 2s steps(30, end) forwards, blink 0.7s infinite;
+        }
+
+        .typing.done {
+            border-right: none;
+        }
+
+        @keyframes typing {
+            from { width: 0; }
+            to { width: 100%; }
+        }
+
+        @keyframes blink {
+            50% { border-color: transparent; }
+        }
+
+        p, .resources, .footer {
+            opacity: 0;
+            animation: fadeIn 1s ease-in-out forwards;
+        }
+
+        p {
+            font-size: 1.1em;
+            color: #666;
+            margin-top: 10px;
+            animation-delay: 2s;
+            margin-bottom: 10px;
+        }
+
+        .resources {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            width: 300px;
+            animation-delay: 3s;
+        }
+
+        .resources span {
+            font-size: 1.2em;
+            color: #2c7a2c;
+        }
+
+        .footer {
+            margin-top: 40px;
+            font-size: 0.9em;
+            color: #999;
+            animation-delay: 4s;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+    </style>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const favicons = [
+                "https://cdn-icons-png.flaticon.com/512/753/753345.png",  // Upload icon
+                "https://cdn-icons-png.flaticon.com/512/1828/1828640.png", // Checkmark
+                "https://cdn-icons-png.flaticon.com/512/190/190411.png",   // Cloud
+                "https://cdn-icons-png.flaticon.com/512/159/159469.png"    // Folder
+            ];
+            const randomFavicon = favicons[Math.floor(Math.random() * favicons.length)];
+
+            let link = document.createElement("link");
+            link.rel = "icon";
+            link.href = randomFavicon;
+            document.head.appendChild(link);
+        });
+    </script>
+</head>
+<body>
+
+<h1 class="typing">✅ File Uploaded Successfully ✅</h1>
+<p>Your file has been securely uploaded to the server and is now ready.</p>
+
+<div class="resources">
+    <span>📂 Ready for further processing or download.</span>
+</div>
+
+<p class="footer">Handled with care by your trusty web server. 🚀</p>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        setTimeout(() => {
+            document.querySelector(".typing").classList.add("done");
+        }, 2000);
+    });
+</script>
+
+</body>
+</html>

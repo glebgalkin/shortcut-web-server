@@ -23,6 +23,11 @@ public class FileServiceImpl implements FileService {
     }
 
     @Override
+    public File getFileUploaded() throws FileNotFoundException {
+        return pathResolver.getFileSuccessfullyUpdated().toFile();
+    }
+
+    @Override
     public File getFileNotFound() {
         return pathResolver.getFileNotFoundPath().toFile();
     }
@@ -44,6 +49,7 @@ public class FileServiceImpl implements FileService {
         private final Path defaultPath;
         private final Path notFoundPath;
         private final Path internalErrorPath;
+        private final Path fileProcessed;
 
         public PathResolver() {
             this.root = Paths.get("").toAbsolutePath();
@@ -51,6 +57,7 @@ public class FileServiceImpl implements FileService {
             this.defaultPath = root.resolve(Paths.get(ConfigLoader.get("directory.default")));
             this.notFoundPath = root.resolve(Paths.get(ConfigLoader.get("directory.not.found")));
             this.internalErrorPath = root.resolve(Paths.get(ConfigLoader.get("directory.internal.error")));
+            this.fileProcessed = root.resolve(Paths.get(ConfigLoader.get("directory.processed")));
         }
 
         public Path getFilePath(String requestPath) {
@@ -61,6 +68,10 @@ public class FileServiceImpl implements FileService {
 
         public Path getFileNotFoundPath() {
             return notFoundPath;
+        }
+
+        public Path getFileSuccessfullyUpdated() {
+            return fileProcessed;
         }
 
         public Path getInternalServerErrorPath() {

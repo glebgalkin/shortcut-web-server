@@ -5,6 +5,9 @@ import java.io.FileNotFoundException;
 
 public interface FileService {
     File getFile(String filePath) throws FileNotFoundException;
+
+    File getFileUploaded() throws FileNotFoundException;
+
     File getFileNotFound();
     File getInternalServerError();
 }

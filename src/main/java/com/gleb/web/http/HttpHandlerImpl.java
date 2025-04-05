@@ -1,38 +1,25 @@
 package com.gleb.web.http;
 
 import com.gleb.web.http.request.HttpRequest;
-import com.gleb.web.http.request.RequestFactory;
+import com.gleb.web.http.request.RequestParser;
 import com.gleb.web.http.response.HttpResponse;
 
 import java.io.*;
 import java.net.Socket;
-import java.nio.charset.StandardCharsets;
 import java.util.Map;
 
 public class HttpHandlerImpl implements HttpHandler {
     private final Socket socket;
-    private final RequestFactory requestFactory;
+    private final RequestParser requestParser;
 
-    public HttpHandlerImpl(Socket socket, RequestFactory requestFactory) {
+    public HttpHandlerImpl(Socket socket, RequestParser requestParser) {
         this.socket = socket;
-        this.requestFactory = requestFactory;
+        this.requestParser = requestParser;
     }
 
     @Override
     public HttpRequest getRequest() throws IOException {
-        String rawData = getRawRequest(socket.getInputStream());
-        return requestFactory.build(rawData);
-    }
-
-    private String getRawRequest(InputStream inputStream) throws IOException {
-        BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream, StandardCharsets.UTF_8));
-        StringBuilder sb = new StringBuilder();
-        String line;
-        while ((line = reader.readLine()) != null && !line.isEmpty()) {
-            sb.append(line);
-            sb.append("\n");
-        }
-        return sb.toString();
+        return requestParser.parse(socket.getInputStream());
     }
 
     @Override

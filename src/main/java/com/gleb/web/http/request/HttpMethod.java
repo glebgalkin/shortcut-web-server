@@ -1,6 +1,6 @@
 package com.gleb.web.http.request;
 
-public enum RequestType {
+public enum HttpMethod {
     GET,
     POST,
     PUT,
