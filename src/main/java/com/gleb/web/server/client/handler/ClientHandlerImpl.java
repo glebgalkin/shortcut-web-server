@@ -55,9 +55,8 @@ public class ClientHandlerImpl implements ClientHandler {
             response = handlePostRequest();
         }
 
-        if (response != null) {
-            httpHandler.sendResponse(response);
-        }
+        if (response == null) return;
+        httpHandler.sendResponse(response);
     }
 
     private boolean isGetRequest(HttpRequest request) {
@@ -69,12 +68,12 @@ public class ClientHandlerImpl implements ClientHandler {
     }
 
 
-    private HttpResponse handleGetRequest(HttpRequest request) throws IOException {
+    private HttpResponse handleGetRequest(HttpRequest request) throws IOException { // Return requested GET file
         File file = fileService.getFile(request.getPath());
         return getHttpResponse(Status.OK, file);
     }
 
-    private HttpResponse handlePostRequest() throws IOException {
+    private HttpResponse handlePostRequest() throws IOException { // Return 'file uploaded successfully'
         File file = fileService.getFileUploaded();
         return getHttpResponse(Status.OK, file);
     }

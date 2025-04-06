@@ -2,8 +2,7 @@ package com.gleb.web.file;
 
 import com.gleb.web.config.ConfigLoader;
 
-import java.io.File;
-import java.io.FileNotFoundException;
+import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -23,7 +22,7 @@ public class FileServiceImpl implements FileService {
     }
 
     @Override
-    public File getFileUploaded() throws FileNotFoundException {
+    public File getFileUploaded() {
         return pathResolver.getFileSuccessfullyUpdated().toFile();
     }
 
@@ -35,6 +34,29 @@ public class FileServiceImpl implements FileService {
     @Override
     public File getInternalServerError() {
         return pathResolver.getInternalServerErrorPath().toFile();
+    }
+
+    @Override
+    public File buildFileFromStream(String fileName, InputStream socketStream, int contentLength) throws IOException {
+        Path targetPath = pathResolver.getDefaultDirectory().resolve(fileName);
+        File destination = new File(targetPath.toString());
+        writeToFile(destination, socketStream, contentLength);
+        return destination;
+    }
+
+    private void writeToFile(File destination, InputStream socketStream, int contentLength) throws IOException{
+        try (FileOutputStream fileOut = new FileOutputStream(destination)) {
+            byte[] buffer = new byte[8192];
+            int totalRead = 0;
+
+            while (totalRead < contentLength) {
+                int bytesToRead = Math.min(buffer.length, contentLength - totalRead);
+                int bytesRead = socketStream.read(buffer, 0, bytesToRead);
+                if (bytesRead == -1) break;
+                fileOut.write(buffer, 0, bytesRead);
+                totalRead += bytesRead;
+            }
+        }
     }
 
     private static void validateFileExist(Path path) throws FileNotFoundException {
@@ -60,21 +82,25 @@ public class FileServiceImpl implements FileService {
             this.fileProcessed = root.resolve(Paths.get(ConfigLoader.get("directory.processed")));
         }
 
-        public Path getFilePath(String requestPath) {
+        private Path getDefaultDirectory(){
+            return filesDirectory;
+        }
+
+        private Path getFilePath(String requestPath) {
             String path = filterPath(requestPath);
             if (isDefaultPath(path)) return defaultPath;
             return getRequestedFilePath(path);
         }
 
-        public Path getFileNotFoundPath() {
+        private Path getFileNotFoundPath() {
             return notFoundPath;
         }
 
-        public Path getFileSuccessfullyUpdated() {
+        private Path getFileSuccessfullyUpdated() {
             return fileProcessed;
         }
 
-        public Path getInternalServerErrorPath() {
+        private Path getInternalServerErrorPath() {
             return internalErrorPath;
         }
 
