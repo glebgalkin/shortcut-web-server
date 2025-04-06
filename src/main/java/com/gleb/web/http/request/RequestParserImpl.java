@@ -92,6 +92,7 @@ public class RequestParserImpl implements RequestParser {
             case "image/gif" -> "gif";
             case "text/html" -> "html";
             case "application/json" -> "json";
+            case "audio/mpeg" -> "mp3";
             default -> "bin";
         };
     }

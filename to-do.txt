@@ -3,13 +3,12 @@
 3. Add timeout
 
 Tasks after review
-1. Join FileUtil and PathResolver into file service
-2. Try to extract request parsing form Network Service. It should be responsible only for network communication
-3. Fix Response builder
-4. Make a builder for server object to provide properties like port number from the code
-5. Use virtual threads
-6. Implement POST requests
+Done 1. Join FileUtil and PathResolver into file service
+Done 2. Try to extract request parsing form Network Service. It should be responsible only for network communication
+Done 3. Fix Response builder
+Done 4. Make a builder for server object to provide properties like port number from the code
+Done 5. Use virtual threads
+Done 6. Implement POST requests
 
-Task after review:
 1. Write as much unit tests as possible
 2. Write integration test
