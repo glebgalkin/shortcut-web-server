@@ -141,9 +141,9 @@ FROM Visits v
          JOIN Doctors d ON v.doctor = d.id;
 
 # TODO: TO FIX
-SELECT v.id, p.name, p.address, p.phone, v.date, d.name AS doctor, d.job_title, presc.dose_mg AS dose, presc.amount
+SELECT v.id, p.name, p.address, p.phone, v.date, d.name AS doctor, d.job_title, m.name as medication, presc.dose_mg AS dose, presc.amount
 FROM Visits v
          JOIN Patients p ON v.patient = p.id
          JOIN Doctors d ON v.doctor = d.id
          JOIN Prescriptions presc ON v.patient
-#          JOIN Medications m ON presc.medication_id = m.id;
+         JOIN Medications m ON presc.medication_id = m.id;
