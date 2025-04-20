@@ -138,7 +138,7 @@ VALUES (1, '2024-11-12', 1, 1, 1),
 SELECT v.id, p.name, p.address, p.phone, v.date, d.name AS doctor, d.job_title
 FROM Visits v
          JOIN Patients p ON v.patient = p.id
-         JOIN Doctors d ON v.doctor = d.id
+         JOIN Doctors d ON v.doctor = d.id;
 
 # TODO: TO FIX
 SELECT v.id, p.name, p.address, p.phone, v.date, d.name AS doctor, d.job_title, presc.dose_mg AS dose, presc.amount
