@@ -134,16 +134,9 @@ VALUES (1, '2024-11-12', 1, 1, 1),
 # (6, 'Иванов И.И.', 'ул. Ленина 10', '+123456789' ,'2024-12-02' ,'Смирнов А.А.', 'Кардиолог', 'Аспирин', '100', '20'),
 # (7, 'Иванов И.И.', 'ул. Ленина 10', '+123456789' ,'2024-12-02' ,'Смирнов А.А.', 'Кардиолог', 'Валидол', '60', '10');
 
-# Working case
-SELECT v.id, p.name, p.address, p.phone, v.date, d.name AS doctor, d.job_title
-FROM Visits v
-         JOIN Patients p ON v.patient = p.id
-         JOIN Doctors d ON v.doctor = d.id;
-
-# TODO: TO FIX
 SELECT v.id, p.name, p.address, p.phone, v.date, d.name AS doctor, d.job_title, m.name as medication, presc.dose_mg AS dose, presc.amount
 FROM Visits v
          JOIN Patients p ON v.patient = p.id
          JOIN Doctors d ON v.doctor = d.id
-         JOIN Prescriptions presc ON v.patient
+         JOIN Prescriptions presc ON v.patient = presc.id
          JOIN Medications m ON presc.medication_id = m.id;
