@@ -1,0 +1,99 @@
+ЗАДАЧА 1 — INNER JOIN
+
+-- Таблицы
+CREATE TABLE students (
+  id INT PRIMARY KEY,
+  name VARCHAR(100)
+);
+
+CREATE TABLE grades (
+  student_id INT,
+  course VARCHAR(100),
+  grade INT
+);
+
+-- Пример данных
+INSERT INTO students VALUES
+(1, 'Аня'), (2, 'Борис'), (3, 'Вика');
+
+INSERT INTO grades VALUES
+(1, 'Математика', 5),
+(2, 'Физика', 4),
+(3, 'Математика', 3),
+(3, 'История', 4);
+
+-- Задание:
+-- Выведите имена студентов и их оценки по курсу "Математика".
+-- Только тех, у кого есть оценки по этому курсу.
+
+
+---
+
+ЗАДАЧА 2 — INNER + LEFT JOIN
+
+-- Таблицы
+CREATE TABLE departments (
+  id INT PRIMARY KEY,
+  name VARCHAR(100)
+);
+
+CREATE TABLE employees (
+  id INT PRIMARY KEY,
+  name VARCHAR(100),
+  department_id INT
+);
+
+CREATE TABLE projects (
+  id INT PRIMARY KEY,
+  name VARCHAR(100),
+  lead_id INT
+);
+
+-- Пример данных
+INSERT INTO departments VALUES
+(1, 'Разработка'), (2, 'Маркетинг');
+
+INSERT INTO employees VALUES
+(1, 'Игорь', 1),
+(2, 'Юлия', 1),
+(3, 'Павел', 2),
+(4, 'Таня', 2);
+
+INSERT INTO projects VALUES
+(1, 'CRM-система', 1),
+(2, 'Landing Page', 4);
+
+-- Задание:
+-- Выведите всех сотрудников с названием их отдела и названием проекта, которым они руководят.
+-- Если сотрудник не руководит проектом — покажите NULL в колонке проекта.
+
+
+---
+
+ЗАДАЧА 3 — FULL OUTER JOIN
+
+-- Таблицы
+CREATE TABLE clients (
+  id INT PRIMARY KEY,
+  name VARCHAR(100)
+);
+
+CREATE TABLE orders (
+  id INT PRIMARY KEY,
+  client_id INT,
+  product VARCHAR(100)
+);
+
+-- Пример данных
+INSERT INTO clients VALUES
+(1, 'ООО "Весна"'), (2, 'ЗАО "Техно"'), (3, 'ИП Иванов');
+
+INSERT INTO orders VALUES
+(1, 1, 'Принтер'),
+(2, NULL, 'Ноутбук'),
+(3, 4, 'Сканер'); -- client_id = 4, клиента нет
+
+-- Задание:
+-- Выведите всех клиентов и их заказы.
+-- Если у клиента нет заказов — покажите NULL в колонках заказа.
+-- Если заказ не привязан к клиенту — имя клиента должно быть NULL.
