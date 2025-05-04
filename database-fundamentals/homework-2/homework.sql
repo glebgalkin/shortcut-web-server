@@ -69,7 +69,8 @@ VALUES (1, 'CRM-система', 1),
 SELECT e.name as name, d.name as department, p.name as project_name
 FROM employees as e
          INNER JOIN departments as d ON e.department_id = d.id
-         LEFT JOIN projects as p ON e.id = p.lead_id;
+         LEFT JOIN projects as p ON e.id = p.lead_id
+WHERE p.id IS NULL;
 
 # -----------------------------------------------------------------------
 
